@@ -104,7 +104,12 @@ class Network(object):
         if limit is not None:
             cids = cids[:limit]
         for cid in cids:
-            yield self.get_post(cid)
+            sleep(2)
+            try:
+                yield self.get_post(cid)
+            except Exception as e:
+                print(f'Error: {e}')
+                sleep(3)
 
     def create_post(self, post_type, post_folders, post_subject, post_content, is_announcement=0, bypass_email=0, anonymous=False):
         """Create a post
